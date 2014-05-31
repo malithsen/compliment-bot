@@ -29,7 +29,6 @@ reply_compliments = ['You are a bucket of awesome', 'You are better than unicorn
                      'Your smile is breath taking.', 'Your mouse told me that you have very soft hands.',
                      'I appreciate you more than Santa appreciates chimney grease.',
                      'You make my data circuits skip a beat.']
-MENTION_MATCH_WORDS = ['need', 'compliment']
 
 INTERVAL = 0  # First compliment should be posted immediatly
 replied_type = []
