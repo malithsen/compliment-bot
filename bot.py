@@ -7,7 +7,6 @@ from datetime import datetime
 from optparse import OptionParser
 import random
 import json
-import time
 import sys
 import ConfigParser
 import re
@@ -72,7 +71,7 @@ class Tweet:
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets are the received from the stream.
-    This is a basic listener that just prints received tweets to stdout.
+    And processes them.
 
     """
     def on_data(self, data):
@@ -88,6 +87,10 @@ class StdOutListener(StreamListener):
 
 
 def response(text):
+    """ selects and returns the appropriate response.
+    replied_type is used to avoid the excessive use of a certain
+    type of response
+    """
     global replied_type
 
     if len(replied_type) == len(keywords)-1:
@@ -138,9 +141,9 @@ def replyIfMention(data):  # refactor this shiz
     tweet = Tweet(data)
     text = tweet.text.lower()
     if text[0:12] == '@complimebot' and 'need' in text:
-        other_mentions = r_macro.findall(text)
+        other_mentions = r_macro.findall(text) # extracting mentions
         users = ' @'.join(other_mentions)
-        users = users.replace('complimebot', '')
+        users = users.replace('complimebot', '') # removing complimebot
         if 'compliment' in text:
             status = '@' + tweet.name + users + ' ' + random.choice(reply_compliments)
         elif 'hug' in text:
@@ -153,6 +156,9 @@ def replyIfMention(data):  # refactor this shiz
 
 def process(data):
     tweet = Tweet(data)
+
+    # we don't need replies mentions. Ommitting tweets with URLs
+    # coz they might be spam bots or irrelevant
     if not (tweet.isRT() or tweet.isMention() or tweet.isURL()):
         logger.info(tweet.text)
         reply = response(tweet.text.lower())
