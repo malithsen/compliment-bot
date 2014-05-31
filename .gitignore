@@ -1,0 +1,9 @@
+logs
+compli.conf
+
+*.pyc
+*.log*
+*.swp
+*.vim
+*~
+*.sublime*
