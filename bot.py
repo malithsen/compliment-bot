@@ -13,21 +13,6 @@ import re
 import logging
 import logging.config
 
-rdict= {'hug': '*hugs*', 'luck': 'Good luck :)',
-        'sad': ['You deserve a compliment!', 'I appreciate all of your opinions.',
-                'Don\'t be sad, You\'re tremendous!', 'Your smile is breath taking.',
-                'I would share my fruit Gushers with you', 'You\'re sweeter than than a bucket of bon-bons!'],
-        'lonely': ['You are a bucket of awesome', 'Don\'t be, I\'m here for you', 'You have the best laugh ever.'],
-        'depressed': ['I hope you feel better.'], 'job':  ['You deserve a promotion.'],
-        'pathetic': ['You are better than unicorns and sparkles combined!'],
-        'nervous': ["Don't worry. You'll do great :)"]}
-# keywords = ['I need a hug', 'I feel sad', 'I feel lonely', 'I\'m depressed', 'I hate my job', 'I am pathetic', 'I\'m nervous']
-keywords = ['I need a hug', 'I\'m depressed', 'I hate my job', 'I am pathetic', 'I\'m nervous', 'Wish me luck', '@complimebot']
-
-reply_compliments = ['You are a bucket of awesome', 'You are better than unicorns and sparkles combined!',
-                     'Your smile is breath taking.', 'Your mouse told me that you have very soft hands.',
-                     'I appreciate you more than Santa appreciates chimney grease.',
-                     'You make my data circuits skip a beat.']
 
 INTERVAL = 0  # First compliment should be posted immediatly
 replied_type = []
@@ -36,6 +21,9 @@ api = None # fugly temp placeholder
 
 FILE_CONFIG = 'compli.conf'
 LOG_CONFIG = 'logging.ini'
+COMPLIMENTS_FILE = 'compliments.json'
+
+rdict = json.load(open(COMPLIMENTS_FILE))
 
 logging.config.fileConfig(LOG_CONFIG)
 logger = logging.getLogger(__name__)
@@ -93,7 +81,7 @@ def response(text):
     """
     global replied_type
 
-    if len(replied_type) == len(keywords)-1:
+    if len(replied_type) == len(rdict['keywords'])-1:
         replied_type[:] = []
 
     if 'was' in text:
@@ -145,7 +133,7 @@ def replyIfMention(data):  # refactor this shiz
         users = ' @'.join(other_mentions)
         users = users.replace('complimebot', '') # removing complimebot
         if 'compliment' in text:
-            status = '@' + tweet.name + users + ' ' + random.choice(reply_compliments)
+            status = '@' + tweet.name + users + ' ' + random.choice(rdict['reply_compliments'])
         elif 'hug' in text:
             status = '@' + tweet.name + users + ' ' + rdict['hug']
         logger.info('Mention> %s' % text)
@@ -186,7 +174,7 @@ def main():
         api = API(auth)
 
         stream = Stream(auth, l)
-        stream.filter(track=keywords)
+        stream.filter(track=rdict['keywords'])
 
     except Exception, e:
         logger.debug('%s, %s ' % (sys.exc_traceback.tb_lineno, e))

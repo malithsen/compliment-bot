@@ -1,0 +1,46 @@
+{
+    "depressed": [
+        "I hope you feel better."
+    ],
+    "hug": "*hugs*",
+    "job": [
+        "You deserve a promotion."
+    ],
+    "keywords": [
+        "I need a hug",
+        "I'm depressed",
+        "I hate my job",
+        "I am pathetic",
+        "I'm nervous",
+        "Wish me luck",
+        "@complimebot"
+    ],
+    "lonely": [
+        "You are a bucket of awesome",
+        "Don't be, I'm here for you",
+        "You have the best laugh ever."
+    ],
+    "luck": "Good luck :)",
+    "nervous": [
+        "Don't worry. You'll do great :)"
+    ],
+    "pathetic": [
+        "You are better than unicorns and sparkles combined!"
+    ],
+    "reply_compliments": [
+        "You are a bucket of awesome",
+        "You are better than unicorns and sparkles combined!",
+        "Your smile is breath taking.",
+        "Your mouse told me that you have very soft hands.",
+        "I appreciate you more than Santa appreciates chimney grease.",
+        "You make my data circuits skip a beat."
+    ],
+    "sad": [
+        "You deserve a compliment!",
+        "I appreciate all of your opinions.",
+        "Don't be sad, You're tremendous!",
+        "Your smile is breath taking.",
+        "I would share my fruit Gushers with you",
+        "You're sweeter than than a bucket of bon-bons!"
+    ]
+}
