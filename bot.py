@@ -33,7 +33,7 @@ reply_compliments = ['You are a bucket of awesome', 'You are better than unicorn
 INTERVAL = 0  # First compliment should be posted immediatly
 replied_type = []
 r_macro = re.compile("""(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)""")
-api = '' # fugly temp placeholder
+api = None # fugly temp placeholder
 
 FILE_CONFIG = 'compli.conf'
 LOG_CONFIG = 'logging.ini'
